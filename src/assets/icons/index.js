@@ -1,0 +1,7 @@
+export { default as Angry } from './Angry'
+export { default as Care } from './Care'
+export { default as Haha } from './Haha'
+export { default as Like } from './Like'
+export { default as Love } from './Love'
+export { default as Sad } from './Sad'
+export { default as Wow } from './Wow'
