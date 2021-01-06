@@ -84,22 +84,17 @@ const Nav = (props) => {
                       </Link>
                     </Box>
                     <Box m={2} onClick={handleCategoryMenuOpen}>
-                      <Link
-                        href="/"
-                        className={classes.scui_link_underline_remove}
+                      <Typography
+                        variant="h2"
+                        color="primary"
+                        className={classes.scui_nav_onhover}
                       >
-                        <Typography
-                          variant="h2"
-                          color="primary"
-                          className={classes.scui_nav_onhover}
-                        >
-                          Categories
-                        </Typography>
-                      </Link>
+                        Categories
+                      </Typography>
                     </Box>
                     <Menu
                       id="simple-menu"
-                      className={classes.scui_nav_menu}
+                      className={classes.scui_nav_subcategory}
                       anchorEl={categoryMenuOpen}
                       keepMounted
                       open={Boolean(categoryMenuOpen)}
@@ -109,49 +104,69 @@ const Nav = (props) => {
                         onClick={handleCategoryMenuClose}
                         className={classes.scui_nav_onhover}
                       >
-                        <Typography
-                          variant="h2"
-                          color="primary"
-                          className={classes.scui_nav_onhover}
+                        <Link
+                          href="/posts/funny"
+                          className={classes.scui_link_underline_remove}
                         >
-                          Funny News
-                        </Typography>
+                          <Typography
+                            variant="h2"
+                            color="primary"
+                            className={classes.scui_nav_onhover}
+                          >
+                            Funny News
+                          </Typography>
+                        </Link>
                       </MenuItem>
                       <MenuItem
                         onClick={handleCategoryMenuClose}
                         className={classes.scui_nav_onhover}
                       >
-                        <Typography
-                          variant="h2"
-                          color="primary"
-                          className={classes.scui_nav_onhover}
+                        <Link
+                          href="/posts/viral"
+                          className={classes.scui_link_underline_remove}
                         >
-                          Viral
-                        </Typography>
+                          <Typography
+                            variant="h2"
+                            color="primary"
+                            className={classes.scui_nav_onhover}
+                          >
+                            Viral
+                          </Typography>
+                        </Link>
                       </MenuItem>
                       <MenuItem
                         onClick={handleCategoryMenuClose}
                         className={classes.scui_nav_onhover}
                       >
-                        <Typography
-                          variant="h2"
-                          color="primary"
-                          className={classes.scui_nav_onhover}
+                        <Link
+                          href="/posts/featured"
+                          className={classes.scui_link_underline_remove}
                         >
-                          Featured
-                        </Typography>
+                          <Typography
+                            variant="h2"
+                            color="primary"
+                            className={classes.scui_nav_onhover}
+                          >
+                            Featured
+                          </Typography>
+                        </Link>
                       </MenuItem>
                       <MenuItem
                         onClick={handleCategoryMenuClose}
                         className={classes.scui_nav_onhover}
                       >
-                        <Typography
-                          variant="h2"
-                          color="primary"
-                          className={classes.scui_nav_onhover}
+                        <Link
+                          href="/posts/gallery"
+                          className={classes.scui_link_underline_remove}
                         >
-                          Gallery
-                        </Typography>
+                          <Typography
+                            variant="h2"
+                            color="primary"
+                            className={classes.scui_nav_onhover}
+                          >
+                            Gallery
+                          </Typography>
+                        </Link>
                       </MenuItem>
                     </Menu>
                     <Box m={2}>

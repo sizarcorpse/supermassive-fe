@@ -1,47 +1,54 @@
-// get all posts
-// get editorsChoice posts
+import { useState } from "react";
 import _ from "lodash";
+
+// #next :
+import { useRouter } from "next/router";
+import getConfig from "next/config";
+import useSWR, { trigger } from "swr";
+
 // #hooks :
-import { getAllPosts } from "@/actions/FetchPosts";
+import { getAllPosts, getAllEditorChoices } from "@/actions/FetchPosts";
 
 // #components :
 import { PostsCard } from "@/components/Post";
-import { withStyles, Grid, Box } from "@material-ui/core";
+import SwiperRoot from "@/components/Swiper/Swiper";
+
+// #material-ui :
+import { withStyles, Grid, Box, Button, Typography } from "@material-ui/core";
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
-
-//1
-// import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-//2
-// import Masonry from "react-masonry-component";
-
 import { ThemeDistributor } from "@/styles/ThemeDistributor";
 
 export async function getServerSideProps(context) {
-  const posts = await getAllPosts(context);
+  const res = await getAllPosts({ context: context });
+  const editorChoices = await getAllEditorChoices({ context: context });
 
   return {
     props: {
-      posts: posts,
+      allPosts: res,
+      editorChoices: editorChoices,
     },
   };
 }
 
 const Home = (props) => {
-  const { posts, classes, width } = props;
+  const { allPosts: post, classes, width, editorChoices } = props;
+  const { publicRuntimeConfig } = getConfig();
+  const router = useRouter();
 
-  // const masonryOptions = {
-  //   transitionDuration: 0,
-  // };
-  // const imagesLoadedOptions = { background: ".my-bg-image-el" };
-  // const style = {
-  //   border: "1px solid pink",
-  // };
+  // const [page, setPage] = useState(parseInt(1));
+  // const { data, error } = useSWR(
+  //   `${publicRuntimeConfig.ROOT_API_URL}/posts?_start=${start}&_limit=4`,
+  //   {
+  //     revalidateOnFocus: false,
+  //     initialData: allPosts,
+  //   }
+  // );
 
+  // #handlers : flex box grid
   function chunkArray(myArray, chunk_size) {
-    var index = 0;
-    var arrayLength = myArray.length;
-    var tempArray = [];
-
+    let index = 0;
+    const arrayLength = myArray.length;
+    const tempArray = [];
     for (index = 0; index < arrayLength; index += chunk_size) {
       let myChunk = myArray.slice(index, index + chunk_size);
       tempArray.push(myChunk);
@@ -49,38 +56,29 @@ const Home = (props) => {
     return tempArray;
   }
 
-  var result = chunkArray(posts, posts.length / 4);
-
-  console.log("withWidth", width);
+  const result = chunkArray(post, post.length / 4);
 
   return (
-    <Grid container components="main">
+    <Grid container components="main" style={{ backgroundColor: "#f9f7f7" }}>
+      <Grid item xs={12}>
+        <Box display="flex" justifyContent="center" width="100%">
+          <SwiperRoot editorChoices={editorChoices} />
+        </Box>
+      </Grid>
+
       <Grid item xs={12}>
         <Box
           aria-label="all-post"
           justifyContent="center"
           className={classes.flexBoxRoot}
         >
-          <Box className={classes.flexCol}>
-            {result[0].map((p, i) => (
-              <PostsCard post={p} key={i} />
-            ))}
-          </Box>
-          <Box className={classes.flexCol}>
-            {result[1].map((p, i) => (
-              <PostsCard post={p} key={i} />
-            ))}
-          </Box>
-          <Box className={classes.flexCol}>
-            {result[2].map((p, i) => (
-              <PostsCard post={p} key={i} />
-            ))}
-          </Box>
-          <Box className={classes.flexCol}>
-            {result[3].map((p, i) => (
-              <PostsCard post={p} key={i} />
-            ))}
-          </Box>
+          {_.shuffle(result).map((subset, i) => (
+            <Box className={classes.flexCol} key={i}>
+              {subset.map((p, i) => (
+                <PostsCard post={p} key={i} />
+              ))}
+            </Box>
+          ))}
         </Box>
       </Grid>
     </Grid>
@@ -90,36 +88,8 @@ const Home = (props) => {
 export default withWidth()(
   withStyles(
     (theme) => ({
-      // ...MuiNav(theme),
       ...ThemeDistributor(theme),
     }),
     { withTheme: true }
   )(Home)
 );
-
-{
-  /* <ResponsiveMasonry
-            columnsCountBreakPoints={{ 500: 1, 810: 2, 1215: 3, 1620: 4 }}
-          >
-            <Masonry>
-              {posts.map((post, i) => (
-                <PostsCard post={post} key={i} />
-              ))}
-            </Masonry>
-          </ResponsiveMasonry> */
-}
-{
-  /* <Masonry
-          className={"my-gallery-class"}
-          style={style}
-          elementType={"ul"}
-          options={masonryOptions}
-          disableImagesLoaded={false}
-          updateOnEachImageLoad={false}
-          imagesLoadedOptions={imagesLoadedOptions}
-        >
-          {posts.map((post, i) => (
-            <PostsCard post={post} key={i} />
-          ))}
-        </Masonry> */
-}

@@ -33,6 +33,11 @@ Router.events.on("routeChangeError", () => {
   NProgress.done();
 });
 
+// Import Swiper styles
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+import "swiper/components/scrollbar/scrollbar.scss";
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
@@ -49,7 +54,7 @@ export default function MyApp({ Component, pageProps }) {
 
         <SWRConfig
           value={{
-            fetcher: (url) => fetch(url, {}).then((r) => r.json()),
+            fetcher: (url) => fetch(url).then((r) => r.json()),
           }}
         >
           <Header />

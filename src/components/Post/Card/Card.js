@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useRef } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import getConfig from "next/config";
 import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import Image from "next/image";
@@ -10,14 +10,9 @@ import {
   CssBaseline,
   Grid,
   Typography,
-  AppBar,
-  Toolbar,
   IconButton,
-  Button,
   Box,
   Hidden,
-  SvgIcon,
-  Tooltip,
   Card,
   CardHeader,
   CardMedia,
@@ -89,7 +84,17 @@ const PostsCard = (props) => {
           {post.categories.map((category, i) => (
             <Box key={i} mr={1}>
               <SMButton variant={category.categoryName}>
-                {category.categoryName}
+                <Link
+                  href={{
+                    pathname: `/posts/${category.categoryName}`,
+                    query: { id: `${category.id}` },
+                    asPath: `/posts/${category.categoryName}`,
+                  }}
+                >
+                  <Typography variant="button" style={{ fontSize: 13 }}>
+                    {category.categoryName}
+                  </Typography>
+                </Link>
               </SMButton>
             </Box>
           ))}
@@ -128,7 +133,7 @@ const PostsCard = (props) => {
           </Box>
         </Box>
 
-        <Box aria-label="title" mx={3} my={1}>
+        <Box aria-label="title" mx={3} my={2}>
           <Typography variant="h3">{post.title}</Typography>
         </Box>
 

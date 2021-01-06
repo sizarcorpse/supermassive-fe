@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     borderRadius: 50,
     backgroundColor: (props) => props.bgColor,
     color: "#ffffff",
+    textDecoration: "none",
   },
 });
 
@@ -39,13 +40,13 @@ const SMButton = (props) => {
   const { children, variant } = props;
 
   const bgColor =
-    variant === "Funny News"
+    variant === "funny"
       ? "#0081ef"
-      : variant === "Featured"
+      : variant === "featured"
       ? "#12a898"
-      : variant === "Gallery"
+      : variant === "gallery"
       ? "ff0f34"
-      : variant === "Viral"
+      : variant === "viral"
       ? "#ff483a"
       : "#ff";
 

@@ -37,7 +37,7 @@ export const ThemeDistributor = (theme) => ({
   scui_nav_appbar: {
     height: 117,
     maxHeigth: 117,
-    borderBottom: "1px solid rgba(227,227,227,1)",
+    // borderBottom: "1px solid rgba(227,227,227,1)",
     elevation: 0,
     backgroundColor: "#f9f7f7",
   },
@@ -47,8 +47,24 @@ export const ThemeDistributor = (theme) => ({
     minHeight: 117,
   },
   scui_nav_onhover: {
+    cursor: "pointer",
     "&:hover": {
       color: "#fc415e",
+    },
+  },
+
+  scui_nav_subcategory: {
+    "& .MuiPopover-paper": {
+      width: 140,
+      height: 140,
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      marginTop: 40,
+      borderTop: "3px solid #fc415e",
+    },
+    "& .MuiMenu-list": {
+      width: "100%",
     },
   },
 
@@ -59,26 +75,19 @@ export const ThemeDistributor = (theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(633px, 1fr))",
   },
-  ScuiSkillCard: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "3rem",
-    color: "#fff",
-    height: "100%",
-    width: "100%",
-    border: "1px solid pink",
-    transition: "all 500ms",
-    overflow: "hidden",
-  },
 
   // components => card
 
   scui_card_cat: {
     position: "absolute",
-    top: "7%",
+    top: "24px",
     left: "7%",
+  },
+
+  scui_swiper_card_details: {
+    position: "absolute",
+    bottom: "5%",
+    left: "5%",
   },
 
   scui_card_reaction_menu: {
