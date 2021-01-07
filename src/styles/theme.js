@@ -37,13 +37,14 @@ const theme = createMuiTheme({
     },
     h3: {
       //post title
-      fontSize: 23,
+      fontFamily: "Ubuntu",
+      fontSize: 25,
       fontWeight: 700,
       fontStyle: "normal",
       fontVariant: "normal",
       textTransform: "capitalize",
-      letterSpacing: ".5px",
-      wordSpacing: "1px",
+      letterSpacing: "0px",
+      wordSpacing: ".5px",
       color: "#292b2c",
     },
     h4: {
@@ -57,7 +58,7 @@ const theme = createMuiTheme({
       color: "#292b2c",
     },
     h5: {
-      fontSize: 30,
+      fontSize: "2.2em",
       fontWeight: 700,
       fontStyle: "normal",
       fontVariant: "normal",
@@ -67,7 +68,7 @@ const theme = createMuiTheme({
       color: "#f8f8f8",
     },
     h6: {
-      fontSize: "16px",
+      fontSize: "1em",
       letterSpacing: ".5px",
       wordSpacing: "2px",
       fontWeight: "300",

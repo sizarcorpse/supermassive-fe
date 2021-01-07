@@ -1,21 +1,4 @@
-import {
-  makeStyles,
-  Grid,
-  Typography,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button,
-  Box,
-  Hidden,
-  SvgIcon,
-  Tooltip,
-  Card,
-  CardHeader,
-  CardMedia,
-  Avatar,
-  Divider,
-} from "@material-ui/core";
+import { makeStyles, Button } from "@material-ui/core";
 
 /**
  * fn:#0081ef
@@ -23,12 +6,11 @@ import {
  * ga:#ff0f34
  * ft:#12a898
  *
- *
- *
  */
 
 const useStyles = makeStyles({
   root: {
+    zIndex: 2000,
     borderRadius: 50,
     backgroundColor: (props) => props.bgColor,
     color: "#ffffff",
@@ -45,7 +27,7 @@ const SMButton = (props) => {
       : variant === "featured"
       ? "#12a898"
       : variant === "gallery"
-      ? "ff0f34"
+      ? "#ff0f34"
       : variant === "viral"
       ? "#ff483a"
       : "#ff";

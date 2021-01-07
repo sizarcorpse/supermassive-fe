@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import getConfig from "next/config";
+import useSWR from "swr";
 import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import Image from "next/image";
+import SwiperMini from "@/components/Swiper/SwiperMini";
 import { formatDistanceToNow } from "date-fns";
+import { useRouter } from "next/router";
 import {
   withStyles,
   CssBaseline,
@@ -27,10 +30,18 @@ import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
 import { SMButton } from "@/components/UI";
 import PopUpReaction from "./PopUpReaction";
 const PostsCard = (props) => {
-  const { classes, post } = props;
+  const { classes, postx } = props;
+  const router = useRouter();
+
   const { publicRuntimeConfig } = getConfig();
 
-  //${publicRuntimeConfig.ROOT_API_URL}${post.cover.url}
+  const { data: post } = useSWR(
+    `${publicRuntimeConfig.ROOT_API_URL}/posts/${postx._id}`,
+    {
+      initialData: postx,
+      revalidateOnFocus: false,
+    }
+  );
 
   const handleBodyCharLimit = (text) => {
     let texts = [];
@@ -63,7 +74,9 @@ const PostsCard = (props) => {
     >
       <Box aria-label="main-content-area">
         <Box aria-label="card-header">
-          {post.cover ? (
+          {post.gallery.length > 0 ? (
+            <SwiperMini photos={post.gallery} />
+          ) : post.cover ? (
             <Box aria-label="card-image">
               <Image
                 src={`${publicRuntimeConfig.ROOT_API_URL}${post.cover.url}`}
@@ -87,8 +100,6 @@ const PostsCard = (props) => {
                 <Link
                   href={{
                     pathname: `/posts/${category.categoryName}`,
-                    query: { id: `${category.id}` },
-                    asPath: `/posts/${category.categoryName}`,
                   }}
                 >
                   <Typography variant="button" style={{ fontSize: 13 }}>
@@ -134,7 +145,11 @@ const PostsCard = (props) => {
         </Box>
 
         <Box aria-label="title" mx={3} my={2}>
-          <Typography variant="h3">{post.title}</Typography>
+          <Link href={`/post/${post.id}`}>
+            <Typography variant="h3" style={{ cursor: "pointer" }}>
+              {post.title}
+            </Typography>
+          </Link>
         </Box>
 
         <Box aria-label="body-preview" mx={3} my={3}>
@@ -160,7 +175,7 @@ const PostsCard = (props) => {
               open={Boolean(reactionPopUpMenuOpen)}
               onClose={handleReactionPopUpMenuClose}
             >
-              <PopUpReaction />
+              <PopUpReaction post={post} />
             </Menu>
             <Typography variant="h4">{post.reactions}</Typography>
           </Box>

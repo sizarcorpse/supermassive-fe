@@ -29,12 +29,25 @@ export async function getServerSideProps(context) {
   const res = await getPostByCategory({ context: context });
 
   return {
-    props: { allPosts: res },
+    props: {
+      allPosts: res.posts,
+      categoryDetails: {
+        categoryName: res.categoryName,
+        categoryId: res._id,
+        categoryCover: res.categoryCoverPhoto,
+      },
+    },
   };
 }
 
 const Category = (props) => {
-  const { allPosts: post, classes, width, editorChoices } = props;
+  const {
+    allPosts: post,
+    classes,
+    width,
+    editorChoices,
+    categoryDetails,
+  } = props;
   const { publicRuntimeConfig } = getConfig();
   const router = useRouter();
 
@@ -57,8 +70,46 @@ const Category = (props) => {
       <Grid item xs={12}>
         <Box width={"100%"} display="flex" justifyContent="center">
           <Box mx={6} maxWidth={1700} width="100%">
-            <Card>
-              <Typography></Typography>
+            <Card style={{ padding: "32px 0px" }}>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+                flexShrink={1}
+              >
+                <Typography
+                  style={{
+                    fontFamily: "Ubuntu",
+                    fontSize: "3.5em",
+                    letterSpacing: -1.4,
+                    wordSpacing: 0,
+                    fontWeight: 300,
+                    textTransform: "capitalize",
+                    fontStyle: "normal",
+                    fontVariant: "normal",
+                    textAlign: "center",
+                    lineHeight: 1.3,
+                  }}
+                >
+                  Category : {categoryDetails.categoryName}
+                </Typography>
+                <Typography
+                  style={{
+                    fontFamily: "Ubuntu",
+                    fontSize: "1.2em",
+                    letterSpacing: 1,
+                    wordSpacing: 1,
+                    fontWeight: 300,
+                    textTransform: "capitalize",
+                    fontStyle: "normal",
+                    fontVariant: "normal",
+                    textAlign: "center",
+                  }}
+                >
+                  Posts in this category featured and editor choice.
+                </Typography>
+              </Box>
             </Card>
           </Box>
         </Box>
@@ -70,10 +121,10 @@ const Category = (props) => {
           justifyContent="center"
           className={classes.flexBoxRoot}
         >
-          {_.shuffle(result).map((subset, i) => (
+          {result.map((subset, i) => (
             <Box className={classes.flexCol} key={i}>
               {subset.map((p, i) => (
-                <PostsCard post={p} key={i} />
+                <PostsCard postx={p} key={i} />
               ))}
             </Box>
           ))}

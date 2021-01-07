@@ -52,7 +52,7 @@ const SwiperCard = (props) => {
       <Box aria-label="main-content-area">
         <Box aria-label="card-header">
           {post.cover ? (
-            <Box aria-label="card-image">
+            <Box aria-label="card-image" minHeight={361}>
               <Image
                 src={`${publicRuntimeConfig.ROOT_API_URL}${post.cover.url}`}
                 width={post.cover.width}
@@ -84,7 +84,7 @@ const SwiperCard = (props) => {
             <Typography variant="h5">{post.title}</Typography>
           </Box>
 
-          <Box aria-label="body-preview" my={2} width="50%">
+          <Box aria-label="body-preview" my={2} width="100%">
             <Typography variant="h6">
               {handleBodyCharLimit(post.body)}
             </Typography>

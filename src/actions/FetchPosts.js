@@ -1,5 +1,5 @@
 import getConfig from "next/config";
-// import fetch from "isomorphic-unfetch";
+import fetch from "isomorphic-unfetch";
 
 export const getAllPosts = async ({ context }) => {
   const { publicRuntimeConfig } = getConfig();
@@ -26,10 +26,19 @@ export const getPostByCategory = async ({ context }) => {
   const cat = context.query.category;
 
   const response = await fetch(
-    `${publicRuntimeConfig.ROOT_API_URL}/categories?categoryName=${cat}`,
-    { mode: "cors" }
+    `${publicRuntimeConfig.ROOT_API_URL}/categories?categoryName=${cat}`
   );
   const data = await response.json();
 
-  return data[0];
+  return data;
+};
+
+export const getSinglePost = async ({ context, postId }) => {
+  const { publicRuntimeConfig } = getConfig();
+
+  const response = await fetch(
+    `${publicRuntimeConfig.ROOT_API_URL}/posts/${postId}`
+  );
+  const data = await response.json();
+  return data;
 };

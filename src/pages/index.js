@@ -75,7 +75,7 @@ const Home = (props) => {
           {_.shuffle(result).map((subset, i) => (
             <Box className={classes.flexCol} key={i}>
               {subset.map((p, i) => (
-                <PostsCard post={p} key={i} />
+                <PostsCard postx={p} key={i} />
               ))}
             </Box>
           ))}

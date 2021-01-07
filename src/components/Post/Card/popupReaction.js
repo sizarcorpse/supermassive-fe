@@ -3,6 +3,8 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import getConfig from "next/config";
 import { ThemeDistributor } from "@/styles/ThemeDistributor";
+import useSWR, { trigger, mutate } from "swr";
+import { giveReaction } from "@/actions/UpdatePosts";
 
 import {
   withStyles,
@@ -33,8 +35,17 @@ import { Like } from "@/assets/icons";
 
 const PopUpReaction = (props) => {
   const { classes, post } = props;
+  const { publicRuntimeConfig } = getConfig();
 
-  //${publicRuntimeConfig.ROOT_API_URL}${post.cover.url}
+  const handleReaction = async (reaction) => {
+    mutate(
+      `${publicRuntimeConfig.ROOT_API_URL}/posts/${post._id}`,
+      { ...post, reactions: post.reactions + 1 },
+      false
+    );
+    await giveReaction({ postId: post.id, reaction: reaction });
+    trigger(`${publicRuntimeConfig.ROOT_API_URL}/posts/${post._id}`);
+  };
 
   return (
     <Box
@@ -50,7 +61,10 @@ const PopUpReaction = (props) => {
             whileHover={{ scale: 1.1, y: -5 }}
             whileTap={{ scale: 0.9 }}
           >
-            <IconButton className={classes.scui_header_iconbutton}>
+            <IconButton
+              className={classes.scui_header_iconbutton}
+              onClick={() => handleReaction("like")}
+            >
               <Like />
             </IconButton>
           </motion.div>
@@ -63,7 +77,7 @@ const PopUpReaction = (props) => {
             whileTap={{ scale: 0.9 }}
           >
             <IconButton className={classes.scui_header_iconbutton}>
-              <Haha />
+              <Haha onClick={() => handleReaction("haha")} />
             </IconButton>
           </motion.div>
         </Box>
@@ -75,7 +89,7 @@ const PopUpReaction = (props) => {
             whileTap={{ scale: 0.9 }}
           >
             <IconButton className={classes.scui_header_iconbutton}>
-              <Love />
+              <Love onClick={() => handleReaction("love")} />
             </IconButton>
           </motion.div>
         </Box>
@@ -87,7 +101,7 @@ const PopUpReaction = (props) => {
             whileTap={{ scale: 0.9 }}
           >
             <IconButton className={classes.scui_header_iconbutton}>
-              <Sad />
+              <Sad onClick={() => handleReaction("sad")} />
             </IconButton>
           </motion.div>
         </Box>
@@ -99,7 +113,7 @@ const PopUpReaction = (props) => {
             whileTap={{ scale: 0.9 }}
           >
             <IconButton className={classes.scui_header_iconbutton}>
-              <Angry />
+              <Angry onClick={() => handleReaction("angry")} />
             </IconButton>
           </motion.div>
         </Box>
@@ -111,7 +125,7 @@ const PopUpReaction = (props) => {
             whileTap={{ scale: 0.9 }}
           >
             <IconButton className={classes.scui_header_iconbutton}>
-              <Wow />
+              <Wow onClick={() => handleReaction("wow")} />
             </IconButton>
           </motion.div>
         </Box>

@@ -108,4 +108,22 @@ export const ThemeDistributor = (theme) => ({
       flex: "100%",
     },
   },
+  try: {
+    "& img": {
+      maxWidth: 995,
+      width: "auto",
+      height: "auto",
+    },
+
+    "& p": {
+      fontSize: "15px",
+      letterSpacing: ".5px",
+      wordSpacing: "2px",
+      fontWeight: "300",
+      textDecoration: "none solid rgb(255, 255, 255)",
+      fontStyle: "normal",
+      fontVariant: "normal",
+      color: "#292b2c",
+    },
+  },
 });

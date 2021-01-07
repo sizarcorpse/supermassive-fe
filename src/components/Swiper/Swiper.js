@@ -20,7 +20,7 @@ const SwiperRoot = (props) => {
   const { editorChoices } = props;
 
   return (
-    <Box mx={6} maxWidth={1700} width="100%">
+    <Box mx={6} maxWidth={1700} minHeight={361} width="100%">
       <Swiper
         spaceBetween={50}
         slidesPerView={1}
