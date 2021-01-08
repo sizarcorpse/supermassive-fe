@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import {
   withStyles,
@@ -27,7 +29,7 @@ import { Like } from "@/assets/icons";
 
 const Head = (props) => {
   const { classes, closeMe, handleNavSmallModalClose } = props;
-
+  const router = useRouter();
   return (
     <Grid container component="main">
       <CssBaseline />
@@ -103,9 +105,11 @@ const Head = (props) => {
                       whileHover={{ scale: 1.1, y: -5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <IconButton className={classes.scui_header_iconbutton}>
-                        <Like />
-                      </IconButton>
+                      <Link href="/posts/reaction/like">
+                        <IconButton className={classes.scui_header_iconbutton}>
+                          <Like />
+                        </IconButton>
+                      </Link>
                     </motion.div>
                   </Box>
                 </Tooltip>
@@ -115,9 +119,11 @@ const Head = (props) => {
                       whileHover={{ scale: 1.1, y: -5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <IconButton className={classes.scui_header_iconbutton}>
-                        <Haha />
-                      </IconButton>
+                      <Link href="/posts/reaction/haha">
+                        <IconButton className={classes.scui_header_iconbutton}>
+                          <Haha />
+                        </IconButton>
+                      </Link>
                     </motion.div>
                   </Box>
                 </Tooltip>
@@ -127,9 +133,11 @@ const Head = (props) => {
                       whileHover={{ scale: 1.1, y: -5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <IconButton className={classes.scui_header_iconbutton}>
-                        <Love />
-                      </IconButton>
+                      <Link href="/posts/reaction/love">
+                        <IconButton className={classes.scui_header_iconbutton}>
+                          <Love />
+                        </IconButton>
+                      </Link>
                     </motion.div>
                   </Box>
                 </Tooltip>
@@ -139,9 +147,11 @@ const Head = (props) => {
                       whileHover={{ scale: 1.1, y: -5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <IconButton className={classes.scui_header_iconbutton}>
-                        <Sad />
-                      </IconButton>
+                      <Link href="/posts/reaction/sad">
+                        <IconButton className={classes.scui_header_iconbutton}>
+                          <Sad />
+                        </IconButton>
+                      </Link>
                     </motion.div>
                   </Box>
                 </Tooltip>
@@ -151,9 +161,11 @@ const Head = (props) => {
                       whileHover={{ scale: 1.1, y: -5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <IconButton className={classes.scui_header_iconbutton}>
-                        <Angry />
-                      </IconButton>
+                      <Link href="/posts/reaction/angry">
+                        <IconButton className={classes.scui_header_iconbutton}>
+                          <Angry />
+                        </IconButton>
+                      </Link>
                     </motion.div>
                   </Box>
                 </Tooltip>
@@ -163,9 +175,11 @@ const Head = (props) => {
                       whileHover={{ scale: 1.1, y: -5 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <IconButton className={classes.scui_header_iconbutton}>
-                        <Wow />
-                      </IconButton>
+                      <Link href="/posts/reaction/wow">
+                        <IconButton className={classes.scui_header_iconbutton}>
+                          <Wow />
+                        </IconButton>
+                      </Link>
                     </motion.div>
                   </Box>
                 </Tooltip>

@@ -1,18 +1,24 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+// #next :
 import getConfig from "next/config";
-import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import Image from "next/image";
+// #contexts :
 
-// import Swiper core and required components
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+// #hooks :
 
-import { Swiper, SwiperSlide } from "swiper/react";
+// #components :
 
-// install Swiper components
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+// #validations :
 
+// #material-ui :
+import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import { withStyles, Box } from "@material-ui/core";
+
+// #other :
+import SwiperCore, { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+SwiperCore.use([Navigation, Pagination]);
+
+// #mainFunction :
 
 const SwiperMini = (props) => {
   const { photos } = props;
@@ -42,7 +48,6 @@ const SwiperMini = (props) => {
 
 export default withStyles(
   (theme) => ({
-    // ...MuiNav(theme),
     ...ThemeDistributor(theme),
   }),
   { withTheme: true }

@@ -109,10 +109,15 @@ export const ThemeDistributor = (theme) => ({
     },
   },
   try: {
+    maxWidth: 840,
+    width: "100%",
+
     "& img": {
-      maxWidth: 995,
-      width: "auto",
+      maxWidth: 840,
+      width: "100%",
       height: "auto",
+      justifySelf: "center",
+      textAlign: "center",
     },
 
     "& p": {
@@ -125,5 +130,31 @@ export const ThemeDistributor = (theme) => ({
       fontVariant: "normal",
       color: "#292b2c",
     },
+    "& a": {
+      fontSize: "16px",
+      letterSpacing: ".5px",
+      wordSpacing: "2px",
+      fontWeight: "500",
+      textDecoration: "none solid rgb(255, 255, 255)",
+      fontStyle: "normal",
+      fontVariant: "normal",
+      color: "#6459ff",
+    },
+  },
+
+  ScuiTextAreaLarge: {
+    width: "100%",
+    maxHeight: 400,
+    fontSize: 15,
+    border: "1px solid #d3d1d1)",
+    borderRadius: 5,
+    background: "rgba(232,232,232,0.3)",
+    padding: 24,
+  },
+  PostButton: {
+    borderRadius: 0,
+    height: 50,
+    width: 200,
+    background: "#a1a1a3",
   },
 });

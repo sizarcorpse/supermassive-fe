@@ -10,7 +10,7 @@ import Head from "next/head";
 
 // #components :
 import { Header } from "@/components/Header";
-
+import { Footer } from "@/components/Footer";
 // #material-ui :
 import { ThemeProvider } from "@material-ui/core/styles";
 import { CssBaseline, Button } from "@material-ui/core";
@@ -59,6 +59,7 @@ export default function MyApp({ Component, pageProps }) {
         >
           <Header />
           <Component {...pageProps} />
+          <Footer />
         </SWRConfig>
       </ThemeProvider>
     </>

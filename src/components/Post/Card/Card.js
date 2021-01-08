@@ -1,40 +1,49 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+// #next :
 import Link from "next/link";
 import getConfig from "next/config";
 import useSWR from "swr";
-import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import Image from "next/image";
-import SwiperMini from "@/components/Swiper/SwiperMini";
-import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/router";
+// #contexts :
+
+// #hooks :
+
+// #components :
+import { SMButton } from "@/components/UI";
+import SwiperMini from "@/components/Swiper/SwiperMini";
+import PopUpReaction from "./PopUpReaction";
+
+// #validations :
+
+// #material-ui :
+import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import {
   withStyles,
-  CssBaseline,
-  Grid,
   Typography,
   IconButton,
   Box,
   Hidden,
   Card,
-  CardHeader,
-  CardMedia,
   Avatar,
   Divider,
   Menu,
-  MenuItem,
 } from "@material-ui/core";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
-import { SMButton } from "@/components/UI";
-import PopUpReaction from "./PopUpReaction";
+
+// #other :
+import { motion } from "framer-motion";
+import { formatDistanceToNow } from "date-fns";
+
+// #mainFunction :
+
 const PostsCard = (props) => {
   const { classes, postx } = props;
-  const router = useRouter();
 
+  // #action :
   const { publicRuntimeConfig } = getConfig();
-
   const { data: post } = useSWR(
     `${publicRuntimeConfig.ROOT_API_URL}/posts/${postx._id}`,
     {
@@ -43,19 +52,17 @@ const PostsCard = (props) => {
     }
   );
 
+  // #handlers :
   const handleBodyCharLimit = (text) => {
     let texts = [];
-
     for (let i = 0; i <= 100; i++) {
       texts.push(text[i]);
     }
-
     return texts.join("") + "...";
   };
 
-  // reaction popUp open
+  // #handlers : reaction popUp open
   const [reactionPopUpMenuOpen, setReactionPopUpMenuOpen] = useState(null);
-
   const handleReactionPopUpMenuOpen = (event) => {
     setReactionPopUpMenuOpen(event.currentTarget);
   };
@@ -121,11 +128,15 @@ const PostsCard = (props) => {
           my={1}
         >
           <Box display="flex" alignItems="center" mx={1}>
-            <Avatar
-              src={`${publicRuntimeConfig.ROOT_API_URL}${
-                post.uploader && post.uploader.userPhoto.url
-              }`}
-            ></Avatar>
+            <Avatar>
+              <Image
+                src={`${publicRuntimeConfig.ROOT_API_URL}${
+                  post.uploader && post.uploader.userPhoto.url
+                }`}
+                width={post.uploader.userPhoto.width}
+                height={post.uploader.userPhoto.height}
+              />
+            </Avatar>
           </Box>
           <Box display="flex" alignItems="center">
             <Typography variant="h1" color="primary">

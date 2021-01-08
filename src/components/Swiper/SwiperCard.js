@@ -1,42 +1,46 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+// #next :
 import getConfig from "next/config";
-import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import Image from "next/image";
-import { formatDistanceToNow } from "date-fns";
+// #contexts :
+
+// #hooks :
+
+// #components :
+import { SMButton } from "@/components/UI";
+// #validations :
+
+// #material-ui :
+import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import {
   withStyles,
-  CssBaseline,
-  Grid,
   Typography,
   IconButton,
   Box,
-  Hidden,
   Card,
-  CardHeader,
-  CardMedia,
   Avatar,
 } from "@material-ui/core";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import CommentOutlinedIcon from "@material-ui/icons/CommentOutlined";
-import { SMButton } from "@/components/UI";
+
+// #other :
+import { formatDistanceToNow } from "date-fns";
+
+// #mainFunction :
 
 const SwiperCard = (props) => {
+  const { publicRuntimeConfig } = getConfig();
   const {
     editorChoice: { post },
     classes,
   } = props;
 
-  const { publicRuntimeConfig } = getConfig();
-
+  // #handlers :
   const handleBodyCharLimit = (text) => {
     let texts = [];
-
     for (let i = 0; i <= 200; i++) {
       texts.push(text[i]);
     }
-
     return texts.join("") + "...";
   };
 
@@ -123,11 +127,15 @@ const SwiperCard = (props) => {
                 <Typography variant="h6">{post.totalComments}</Typography>
               </Box>
               <Box display="flex" alignItems="center" mx={1}>
-                <Avatar
-                  src={`${publicRuntimeConfig.ROOT_API_URL}${
-                    post.uploader.userPhoto && post.uploader.userPhoto.url
-                  }`}
-                ></Avatar>
+                <Avatar>
+                  <Image
+                    src={`${publicRuntimeConfig.ROOT_API_URL}${
+                      post.uploader && post.uploader.userPhoto.url
+                    }`}
+                    width={post.uploader.userPhoto.width}
+                    height={post.uploader.userPhoto.height}
+                  />
+                </Avatar>
               </Box>
               <Box display="flex" alignItems="center">
                 <Typography variant="h6">{post.uploader.username}</Typography>

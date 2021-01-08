@@ -23,7 +23,9 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-html-parser": "^2.0.2",
+    "react-images": "^1.1.7",
     "react-markdown": "^5.0.3",
+    "react-photo-gallery": "^8.0.0",
     "sass": "^1.32.0",
     "swiper": "^6.4.5",
     "swr": "^0.3.11"

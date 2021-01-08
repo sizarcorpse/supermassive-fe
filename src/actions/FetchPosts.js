@@ -42,3 +42,14 @@ export const getSinglePost = async ({ context, postId }) => {
   const data = await response.json();
   return data;
 };
+
+export const getPostsByReaction = async ({ context, reactionBy }) => {
+  const { publicRuntimeConfig } = getConfig();
+
+  const response = await fetch(
+    `${publicRuntimeConfig.ROOT_API_URL}/posts?_sort=${reactionBy}:DESC`
+  );
+  const data = await response.json();
+
+  return data;
+};

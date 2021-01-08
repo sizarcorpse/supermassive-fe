@@ -1,30 +1,17 @@
-import React, { useState } from "react";
-import { useRef } from "react";
-import { motion } from "framer-motion";
+// #next :
 import getConfig from "next/config";
-import { ThemeDistributor } from "@/styles/ThemeDistributor";
 import useSWR, { trigger, mutate } from "swr";
-import { giveReaction } from "@/actions/UpdatePosts";
+// #contexts :
 
-import {
-  withStyles,
-  CssBaseline,
-  Grid,
-  Typography,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button,
-  Box,
-  Hidden,
-  SvgIcon,
-  Tooltip,
-  Card,
-  CardHeader,
-  CardMedia,
-  Avatar,
-  Divider,
-} from "@material-ui/core";
+// #hooks :
+import { giveReaction } from "@/actions/UpdatePosts";
+// #components :
+
+// #validations :
+
+// #material-ui :
+import { ThemeDistributor } from "@/styles/ThemeDistributor";
+import { withStyles, IconButton, Box, Tooltip } from "@material-ui/core";
 
 import { Angry } from "@/assets/icons";
 import { Haha } from "@/assets/icons";
@@ -32,11 +19,16 @@ import { Love } from "@/assets/icons";
 import { Sad } from "@/assets/icons";
 import { Wow } from "@/assets/icons";
 import { Like } from "@/assets/icons";
+// #other :
+import { motion } from "framer-motion";
+
+// #mainFunction :
 
 const PopUpReaction = (props) => {
   const { classes, post } = props;
   const { publicRuntimeConfig } = getConfig();
 
+  // #handlers :
   const handleReaction = async (reaction) => {
     mutate(
       `${publicRuntimeConfig.ROOT_API_URL}/posts/${post._id}`,

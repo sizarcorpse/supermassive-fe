@@ -1,27 +1,17 @@
-import { useState } from "react";
-import _ from "lodash";
-
 // #next :
-import { useRouter } from "next/router";
-import getConfig from "next/config";
-import useSWR, { trigger } from "swr";
 
 // #hooks :
 import { getSinglePost } from "@/actions/FetchPosts";
+
 // #components :
-import { ViewPostDetails } from "@/components/ViewPost";
+import { ViewPostDetails, Reactions } from "@/components/ViewPost";
+
 // #material-ui :
-import {
-  withStyles,
-  Grid,
-  Box,
-  Button,
-  Typography,
-  Card,
-} from "@material-ui/core";
+import { withStyles, Grid, Box, Card } from "@material-ui/core";
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 import { ThemeDistributor } from "@/styles/ThemeDistributor";
 
+// #serverSideProps :
 export async function getServerSideProps(context) {
   const postId = context.query.postid;
   const res = await getSinglePost({ context: context, postId: postId });
@@ -31,30 +21,31 @@ export async function getServerSideProps(context) {
   };
 }
 
+// #mainFunction :
 const ViewPost = (props) => {
-  const { post } = props;
-  const { publicRuntimeConfig } = getConfig();
-  const router = useRouter();
+  const { post, width } = props;
 
-  console.log(router);
-
+  console.log("width is :", width);
   return (
-    <Grid container components="main" style={{ backgroundColor: "#f9f7f7" }}>
-      <Grid item xs={6}>
+    <Grid
+      container
+      components="main"
+      style={{ backgroundColor: "#f9f7f7", display: "flex" }}
+    >
+      <Grid item xs={false} sm={false} md={false} lg={false} xl={1} />
+      <Grid item xl={6} lg={8} md={7} sm={12} xs={12}>
         <Box width="100%" height="100%">
           <ViewPostDetails post={post} />
         </Box>
       </Grid>
-      <Grid item xs={3}>
-        <Box width="100%" border={1}>
-          5
+      <Grid item xl={4} lg={4} md={5} sm={12} xs={12}>
+        <Box width="100%" display="flex" justifyContent="center" mb={5}>
+          <Card>
+            <Reactions postx={post} />
+          </Card>
         </Box>
       </Grid>
-      <Grid item xs={3}>
-        <Box width="100%" border={1}>
-          6
-        </Box>
-      </Grid>
+      <Grid item xs={false} sm={false} md={false} lg={false} xl={1} />
     </Grid>
   );
 };

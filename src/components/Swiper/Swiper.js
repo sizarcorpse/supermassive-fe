@@ -1,20 +1,25 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import getConfig from "next/config";
+// #next :
+
+// #contexts :
+
+// #hooks :
+
+// #components :
+
+// #validations :
+
+// #material-ui :
 import { ThemeDistributor } from "@/styles/ThemeDistributor";
-import Image from "next/image";
-import { formatDistanceToNow } from "date-fns";
+import { withStyles, Box } from "@material-ui/core";
+
+// #other :
 import SwiperCard from "./SwiperCard";
-
-// import Swiper core and required components
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-
+import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// install Swiper components
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+SwiperCore.use([Navigation, Pagination]);
 
-import { withStyles, Box } from "@material-ui/core";
+// #mainFunction :
 
 const SwiperRoot = (props) => {
   const { editorChoices } = props;
@@ -39,7 +44,6 @@ const SwiperRoot = (props) => {
 
 export default withStyles(
   (theme) => ({
-    // ...MuiNav(theme),
     ...ThemeDistributor(theme),
   }),
   { withTheme: true }

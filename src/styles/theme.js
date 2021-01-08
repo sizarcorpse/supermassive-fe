@@ -79,7 +79,16 @@ const theme = createMuiTheme({
     },
     body1: {},
     body2: {},
-    subtitle1: {},
+    subtitle1: {
+      fontSize: "1.5em",
+      fontWeight: 500,
+      fontStyle: "normal",
+      fontVariant: "normal",
+      textTransform: "capitalize",
+      letterSpacing: ".5px",
+      wordSpacing: "1px",
+      color: "#2e2e2e",
+    },
     subtitle2: {},
     button: {
       fontSize: "14px",
